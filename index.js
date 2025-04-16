@@ -49,6 +49,26 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 
+/* MONGO SETUP */
+const connectDb = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URL);
+      // added this by default data when server was run first time 
+      // now this data is stored on mongodb for testing and other purpose
+      // and now i am commenting it to avoid from adding frequently when server will run;
+      /*userModel.insertMany(users);
+      postModel.insertMany(posts);*/
+  } catch (e) {
+    console.log("cannot connect with mongodb: "+e);
+  }
+};
+
+
+connectDb();
+app.listen(3001, () => {
+  console.log("server is running at port 3000!!! and connected with mongodb");
+});
+
 /* ROUTES WITH FILES */
 app.post("/auth/register", upload.single("picture"), register);
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
@@ -57,29 +77,5 @@ app.post("/posts", verifyToken, upload.single("picture"), createPost);
 app.use('/auth', authRoutes);
 app.use('/users', usersRoutes);
 app.use('/posts', postRoutes);
-
-
-/* MONGO SETUP */
-const connectDb = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URL);
-
-    //app.listen(3001, () => {
-      //console.log("server is running at port 3000!!! and connected with mongodb");
-      // added this by default data when server was run first time 
-      // now this data is stored on mongodb for testing and other purpose
-      // and now i am commenting it to avoid from adding frequently when server will run;
-      /*userModel.insertMany(users);
-      postModel.insertMany(posts);*/
-    //});
-
-
-
-
-  } catch (e) {
-    console.log("cannot connect with mongodb: "+e);
-  }
-};
-connectDb();
 
 export default app;
