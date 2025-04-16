@@ -63,15 +63,19 @@ app.use('/posts', postRoutes);
 const connectDb = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URL);
-    app.listen(3001, () => {
-      console.log("server is running at port 3000!!! and connected with mongodb");
 
+    //app.listen(3001, () => {
+      //console.log("server is running at port 3000!!! and connected with mongodb");
       // added this by default data when server was run first time 
       // now this data is stored on mongodb for testing and other purpose
       // and now i am commenting it to avoid from adding frequently when server will run;
       /*userModel.insertMany(users);
       postModel.insertMany(posts);*/
-    });
+    //});
+
+
+
+
   } catch (e) {
     console.log("cannot connect with mongodb: "+e);
   }
