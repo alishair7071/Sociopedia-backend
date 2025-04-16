@@ -65,9 +65,6 @@ const connectDb = async () => {
 
 
 connectDb();
-app.listen(3001, () => {
-  console.log("server is running at port 3000!!! and connected with mongodb");
-});
 
 /* ROUTES WITH FILES */
 app.post("/auth/register", upload.single("picture"), register);
