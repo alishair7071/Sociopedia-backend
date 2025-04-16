@@ -8,15 +8,15 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
-import usersRoutes from "./routes/users.js";
-import  authRoutes  from "./routes/auth.js";
-import postRoutes from "./routes/posts.js";
-import { register } from "./controllers/auth.js";
-import { createPost } from "./controllers/posts.js";
-import { verifyToken } from "./middlewares/auth.js";
-import userModel from "./models/User.js";
-import postModel from "./models/Post.js";
-import { users, posts } from "./data/index.js";
+import usersRoutes from "../routes/users.js";
+import  authRoutes  from "../routes/auth.js";
+import postRoutes from "../routes/posts.js";
+import { register } from "../controllers/auth.js";
+import { createPost } from "../controllers/posts.js";
+import { verifyToken } from "../middlewares/auth.js";
+import userModel from "../models/User.js";
+import postModel from "../models/Post.js";
+import { users, posts } from "../data/index.js";
 import cors from "cors";
 
 /* CONFIGURATIONS */
