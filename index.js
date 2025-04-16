@@ -77,3 +77,5 @@ const connectDb = async () => {
   }
 };
 connectDb();
+
+export default app;
