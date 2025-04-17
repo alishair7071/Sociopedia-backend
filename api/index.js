@@ -24,7 +24,7 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 const app = express();
 app.use(cors({
-  origin: "https://sociopedia-front-end.netlify.app/",
+  origin: "https://sociopedia-front-end.netlify.app",
   credentials: true,
 }));
 app.use(express.json());
