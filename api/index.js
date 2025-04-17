@@ -17,7 +17,6 @@ import { verifyToken } from "../middlewares/auth.js";
 import userModel from "../models/User.js";
 import postModel from "../models/Post.js";
 import { users, posts } from "../data/index.js";
-import cors from "cors";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
