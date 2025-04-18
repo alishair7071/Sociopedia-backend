@@ -67,7 +67,7 @@ connectDb();
 
 /* ROUTES WITH FILES */
 app.post("/auth/register", register);
-app.post("/posts", verifyToken, upload.single("picture"), createPost);
+app.post("/posts", verifyToken,  createPost);
 
 /* ROUTES */
 app.use('/auth', authRoutes);

@@ -3,7 +3,7 @@ import userModel from "../models/User.js";
 
 export const createPost = async (req, res) => {
   try {
-    const { userId, description, picturePath } = req.body;
+    const { userId, description, imageUrl } = req.body;
     const user = await userModel.findById(userId);
     const newPost = new postModel({
       userId,
@@ -11,8 +11,8 @@ export const createPost = async (req, res) => {
       lastName: user.lastName,
       location: user.location,
       description,
-      userPicturePath: user.picturePath,
-      picturePath,
+      userPicturePath: user.imageUrl,
+      imageUrl,
       likes: {},
       comments: [],
     });
