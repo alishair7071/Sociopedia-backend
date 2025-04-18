@@ -33,6 +33,11 @@ const userSchema = new mongoose.Schema({
     default: ""
   },
 
+  imageUrl: {
+    type: String,
+    required: true
+  },
+
   friends: {
     type: Array,
     default: []
