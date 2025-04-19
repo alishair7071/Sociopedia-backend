@@ -14,15 +14,25 @@ export const getUser = async (req, res) => {
 export const getUserFriends = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log("id from params: "+ id);
     const user = await userModel.findById(id);
+    console.log("user: "+ user);
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
     const friends = await Promise.all(
       user.friends.map((id) => userModel.findById(id))
     );
-    const formattedFriends = friends.map(
-      ({ _id, firstName, lastName, occupation, location, picturePath }) => {
+
+    console.log(friends);
+
+    const formattedFriends = friends
+      .filter(friend => friend !== null)
+      .map(({ _id, firstName, lastName, occupation, location, picturePath }) => {
         return { _id, firstName, lastName, occupation, location, picturePath };
-      }
-    );
+      });
+
     res.status(200).json(formattedFriends);
   } catch (e) {
     res.status(500).json({ msg: e.message });
