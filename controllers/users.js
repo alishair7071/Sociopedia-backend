@@ -29,8 +29,8 @@ export const getUserFriends = async (req, res) => {
 
     const formattedFriends = friends
       .filter(friend => friend !== null)
-      .map(({ _id, firstName, lastName, occupation, location, picturePath }) => {
-        return { _id, firstName, lastName, occupation, location, picturePath };
+      .map(({ _id, firstName, lastName, occupation, location, picturePath, imageUrl }) => {
+        return { _id, firstName, lastName, occupation, location, picturePath, imageUrl };
       });
 
     res.status(200).json(formattedFriends);
