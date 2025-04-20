@@ -50,21 +50,22 @@ export const addRemoveFriends = async (req, res) => {
       user.friends = user.friends.filter((id) => id !== friendId);
       friend.friends = friend.friends.filter((Id) => Id !== id);
     } else {
-      user.friends.push(friendId);
-      friend.friends.push(id);
+       user.friends.push(friendId);
+       friend.friends.push(id);
     }
     await user.save();
     await friend.save();
     const friends = await Promise.all(
       user.friends.map((id) => userModel.findById(id))
     );
+    /*
     const formattedFriends = friends.map(
       ({ _id, firstName, lastName, occupation, location, picturePath }) => {
         return { _id, firstName, lastName, occupation, location, picturePath };
       }
-    );
+    );*/
 
-    res.status(200).json(formattedFriends);
+    res.status(200).json(friends);
 
   } catch (e) {
     res.status(500).json({ msg: e.message });
