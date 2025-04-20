@@ -45,6 +45,9 @@ export const addRemoveFriends = async (req, res) => {
     const { id, friendId } = req.params;
     const user = await userModel.findById(id);
     const friend = await userModel.findById(friendId);
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
 
     if (user.friends.includes(friendId)) {
       user.friends = user.friends.filter((id) => id !== friendId);
@@ -58,14 +61,14 @@ export const addRemoveFriends = async (req, res) => {
     const friends = await Promise.all(
       user.friends.map((id) => userModel.findById(id))
     );
-    /*
-    const formattedFriends = friends.map(
-      ({ _id, firstName, lastName, occupation, location, picturePath }) => {
-        return { _id, firstName, lastName, occupation, location, picturePath };
-      }
-    );*/
+    
+    const formattedFriends = friends
+    .filter(friend => friend !== null) // ✅ ignore invalid/null entries
+    .map(({ _id, firstName, lastName, occupation, location, picturePath }) => {
+      return { _id, firstName, lastName, occupation, location, picturePath };
+    });
 
-    res.status(200).json(friends);
+    res.status(200).json(formattedFriends);
 
   } catch (e) {
     res.status(500).json({ msg: e.message });
